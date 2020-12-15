@@ -6,7 +6,11 @@ const getAll = async (req, res) => {
     if (resBooks.length === 0) {
       return res.status(400).send({ status: 'failed', message: 'no data' });
     }
-    return res.json({ status: 'success', message: 'success get all books', data: resBooks });
+    return res.json({
+      status: 'success',
+      message: 'success get all books',
+      data: resBooks,
+    });
   } catch (error) {
     console.log(error);
     return res.status(400).send({ status: 'failed', message: error.message });
@@ -18,9 +22,15 @@ const getOne = async (req, res) => {
   try {
     const resBook = await booksModel.getOne(isbnBook);
     if (resBook.length === 0) {
-      return res.status(400).send({ status: 'failed', message: 'book not found' });
+      return res
+        .status(400)
+        .send({ status: 'failed', message: 'book not found' });
     }
-    return res.json({ status: 'success', message: 'success get all book', data: resBook });
+    return res.json({
+      status: 'success',
+      message: 'success get all book',
+      data: resBook,
+    });
   } catch (error) {
     console.log(error);
     return res.status(400).send({ status: 'failed', message: error.message });
@@ -33,7 +43,9 @@ const Update = async (req, res) => {
   try {
     const resBook = await booksModel.getOne(isbnBook);
     if (resBook.length === 0) {
-      return res.status(400).send({ status: 'failed', message: 'book not found' });
+      return res
+        .status(400)
+        .send({ status: 'failed', message: 'book not found' });
     }
     const dataUpdate = {
       name,
@@ -51,7 +63,9 @@ const Add = async (req, res) => {
   try {
     const resBook = await booksModel.getOne(isbnBook);
     if (resBook.length > 0) {
-      return res.status(400).send({ status: 'failed', message: 'isbn book exist' });
+      return res
+        .status(400)
+        .send({ status: 'failed', message: 'isbn book exist' });
     }
     const createdAt = new Date();
     // cek database
@@ -74,7 +88,9 @@ const Delete = async (req, res) => {
   try {
     const resBook = await booksModel.getOne(isbnBook);
     if (resBook.length === 0) {
-      return res.status(400).send({ status: 'failed', message: 'book not found' });
+      return res
+        .status(400)
+        .send({ status: 'failed', message: 'book not found' });
     }
     await booksModel.Delete(isbnBook);
     return res.json({ status: 'success', message: 'success deleted book' });
@@ -85,7 +101,11 @@ const Delete = async (req, res) => {
 };
 
 const booksContr = {
-  getAll, getOne, Update, Delete, Add,
+  getAll,
+  getOne,
+  Update,
+  Delete,
+  Add,
 };
 
 export default booksContr;
