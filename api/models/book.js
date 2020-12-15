@@ -1,32 +1,24 @@
-import db from '../configs/db';
+import db from "../configs/db";
 
-const getAll = async () => {
-  const sql = 'SELECT * FROM libraries.books';
-  return db.query(sql);
-};
+const getAll = async () => db.query("SELECT * FROM libraries.books");
 
-const getOne = async (isbnBook) => {
-  const sql = 'SELECT * FROM libraries.books WHERE isbn = ?';
-  return db.query(sql, [isbnBook]);
-};
+const getOne = async (isbnBook) =>
+  db.query("SELECT * FROM libraries.books WHERE isbn = ?", isbnBook);
 
-const Add = async (data) => {
-  const sql = 'INSERT INTO libraries.books SET ?';
-  return db.query(sql, [data]);
-};
+const Add = async (data) => db.query("INSERT INTO libraries.books SET ?", data);
 
-const Update = async (data, isbn) => {
-  const sql = 'UPDATE libraries.books SET ? WHERE isbn = ?';
-  return db.query(sql, [data, isbn]);
-};
+const Update = async (data, isbn) =>
+  db.query("UPDATE libraries.books SET ? WHERE isbn = ?", [data, isbn]);
 
-const Delete = async (isbn) => {
-  const sql = 'DELETE FROM libraries.books WHERE isbn = ?';
-  return db.query(sql, [isbn]);
-};
+const Delete = async (isbn) =>
+  db.query("DELETE FROM libraries.books WHERE isbn = ?", isbn);
 
 const booksModel = {
-  getAll, getOne, Add, Update, Delete,
+  getAll,
+  getOne,
+  Add,
+  Update,
+  Delete,
 };
 
 export default booksModel;
