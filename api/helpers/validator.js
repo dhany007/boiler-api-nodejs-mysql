@@ -2,26 +2,32 @@ import { body, param, validationResult } from 'express-validator';
 
 const ruleAddBook = () => [
   body('isbnBook')
-    .notEmpty('field \'isbnBook\' can not empty'),
+    .notEmpty()
+    .withMessage('field isbnBook can not empty'),
   body('name')
-    .notEmpty('field \'name\' can not empty'),
+    .notEmpty()
+    .withMessage('field name can not empty'),
 ];
 
 const ruleDeleteBook = () => [
   param('isbnBook')
-    .notEmpty('field \'isbnBook\' can not empty'),
+    .notEmpty()
+    .withMessage('field isbnBook can not empty'),
 ];
 
 const ruleUpdateBook = () => [
   param('isbnBook')
-    .notEmpty('field \'isbnBook\' can not empty'),
+    .notEmpty()
+    .withMessage('field isbnBook can not empty'),
   body('name')
-    .notEmpty('field \'name\' can not empty'),
+    .notEmpty()
+    .withMessage('field name can not empty'),
 ];
 
 const ruleGetOneBook = () => [
   param('isbnBook')
-    .notEmpty('field \'isbnBook\' can not empty'),
+    .notEmpty()
+    .withMessage('field isbnBook can not empty'),
 ];
 
 const validate = (req, res, next) => {

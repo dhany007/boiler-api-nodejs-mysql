@@ -1,9 +1,11 @@
 import express from 'express';
 import { json, urlencoded } from 'body-parser';
 import cors from 'cors';
-import morgan from 'morgan';
+import logger from 'morgan';
+import moment from 'moment';
 
 import routerDev from './api/index';
+import winston from './api/configs/winston';
 
 require('dotenv').config();
 
@@ -21,7 +23,11 @@ app.use(urlencoded({
 }));
 
 app.use(cors());
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
+
+app.use(logger('combined', { stream: winston.stream }));
+logger.token('date', () => moment().format('YYYY-MM-DD HH:mm:ss'));
+
 
 app.use('/', routerDev);
 
